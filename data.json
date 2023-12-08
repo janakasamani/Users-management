@@ -1,0 +1,32 @@
+{ "users": [
+    {"id": 1,
+    "username":"jana kasamani",
+    "first name": "jana",
+    "last name": "kasamani",
+    "password":1234, 
+    "email": "Jana.kasamani@hotmail.com"},
+
+
+    {"id": 2,
+    "username":"john",
+    "first name": "john",
+    "last name": "kasamani",
+    "password":1234, 
+    "email": "Jana.kasamani@hotmail.com"},
+
+    {"id": 3,
+    "username":"tamara smith",
+    "first name": "tamara",
+    "last name": "kasamani",
+    "password":1234, 
+    "email": "Jana.kasamani@hotmail.com"},
+
+    {"id": 4,
+    "username":"ali smith",
+    "first name": "ali",
+    "last name": "kasamani",
+    "password":1234, 
+    "email": "Jana.smith@hotmail.com"}
+    
+    
+]}

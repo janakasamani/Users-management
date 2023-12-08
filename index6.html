@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles6.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+<body>
+  <header>
+    <h1 id="nav-title">Laibrus</h1>
+    <nav>
+        <div class="hamburger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="menu">
+            <li><a href="./index5.html">Home</a></li>
+            <li><a href="./index6.html">Users</a></li>
+            <li><a href="./index2.html">Logout</a></li>
+        </ul>
+    </nav>
+    
+</header>
+<!-- hero secrion -->
+    <div class="widget">
+        <h2>Users</h2>
+        <div >
+            <button class="first-button">Add User</button>
+        </div>
+        
+        <table>
+          <tr>
+              <th id="table-first">First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Action</th>
+          </tr>
+          <tbody id="tableBody">
+          </tbody>
+      </table>
+   
+    </div>
+<!-- add popup -->
+<div id="AddUserPopup" class="popup">
+  <div class="content">
+      <h2 class="popup-header">Add User</h2>
+      <div class="popup-input">
+        <label class="star-label">First Name </label>
+        <input id="firstNamePopup">
+        <p id="firstNameError"></p>
+      </div>
+      <div class="popup-input">
+        <label class="star-label">Last Name </label>
+        <input id="lastNamePopup">
+        <p id="lastNameError"></p>
+      </div>
+      <div class="popup-input">
+        <label class="star-label">Email </label>
+        <input  id="emailPopup">
+        <p id="emailError"></p>
+      </div>
+      <div class="popup-input">
+        <label class="star-label">Password </label>
+        <input type="password" id="passwordPopup">
+        <p id="passwordError"></p>
+      </div> 
+      <div class="buttons">
+        <button class="cancel-button" id="closeAddPopup">cancel</button>
+        <button class="Add-button" onclick="addData()">Add User</button>
+      </div>       
+      
+  </div>
+</div>
+<!-- edit popup -->
+<div id="EditUserPopup" class="popup">
+  <div class="content">
+      <h2 class="popup-header">Edit User</h2>
+      <div class="popup-input">
+        <label>First Name</label>
+        <input id="EditFirstNameInput" >
+      </div>
+      <div class="popup-input">
+        <label>Last Name</label>
+        <input id="EditLastNameInput" >
+      </div>
+      <div class="popup-input">
+        <label >Email</label>
+        <input id="EditEmailInput">
+      </div>
+      <div class="buttons">
+        <button class="cancel-button" id="closeAddPopup2">cancel</button>
+        <button class="Add-button" onclick="editData()">Edit User</button>
+      </div>       
+      
+  </div>
+</div>
+
+<!--delete popup-->
+<div id="DeleteUserPopup" class="popup">
+  <div class="content2">
+    <div>
+      <h2 class="popup-header">Confirm delete</h2>
+      <p>Are you sure you want to delete this user?</p>
+    </div>
+      
+    <div class="delete-buttons">
+      <button class="cancel-button" id="closeAddPopup3">cancel</button>
+      <button class="Add-button" onclick="deleteData()" >Delete</button>
+    </div>       
+  </div>
+</div>
+
+
+<script>
+ 
+  function deleteUserData(userId) {
+  localStorage.removeItem(userId);
+  }
+
+  function populateTable(data) {
+      const tableBody = document.getElementById('tableBody');
+      data.users.forEach(user => {
+      const row = tableBody.insertRow();
+      const firstNameCell = row.insertCell(0);
+      const lastNameCell = row.insertCell(1);
+      const emailCell = row.insertCell(2);
+      const buttonCell = row.insertCell(3);
+      
+      firstNameCell.innerText = user['first name'];
+      lastNameCell.innerText = user['last name'];
+      emailCell.innerText = user['email'];
+      row.setAttribute('data-user-id', user.id); // Set id attribute to user id
+      console.log("row");
+      console.log(row);
+
+      const editButton = document.createElement('button');
+      editButton.className = 'edit-button';
+      editButton.innerText = 'Edit';
+      editButton.setAttribute('data-user-id', user.id); // Set id attribute to user id
+
+      const deleteButton = document.createElement('button');
+      deleteButton.className = 'delete-button';
+      deleteButton.innerText = 'Delete';
+      deleteButton.setAttribute('data-user-id', user.id); // Set id attribute to user id
+
+
+      
+      buttonCell.appendChild(editButton);
+      buttonCell.appendChild(deleteButton); 
+      // saveDataToLocalStorage(user);  
+      });
+
+    }
+  function deleteData(){  
+    
+    userId = document.getElementById('DeleteUserPopup').getAttribute('data-user-id')
+    console.log('userId')
+    console.log(userId)
+    const table = document.getElementById('tableBody');
+    
+    for (let i = 0; i < table.rows.length; i++) {
+          const row = table.rows[i];
+          const buttonUserId = row.cells[3].querySelector('.delete-button').getAttribute('data-user-id');
+          console.log("buttonUserId")
+          console.log(buttonUserId)
+          if (buttonUserId == userId) {
+              table.deleteRow(i);
+              deleteUserData(userId);
+              break;
+          }
+      }
+      $("#DeleteUserPopup").hide();
+      
+    }
+    
+
+  function editData(){
+    userId = document.getElementById('EditUserPopup').getAttribute('data-user-id');
+    console.log('userId');
+    console.log(userId);
+    const table = document.getElementById('tableBody');
+    
+    for (let i = 0; i < table.rows.length; i++) {
+          const row = table.rows[i];
+          const buttonUserId = row.cells[3].querySelector('.edit-button').getAttribute('data-user-id');
+          console.log("buttonUserId");
+          console.log(buttonUserId);
+          if (buttonUserId == userId) {
+              const firstNameCell = row.cells[0];
+              const lastNameCell = row.cells[1];
+              const emailCell = row.cells[2];
+              
+              var inputElement = document.getElementById("EditFirstNameInput");
+              var first_name= inputElement.value;
+              
+              var inputElement2 = document.getElementById("EditLastNameInput");  
+              var last_name = inputElement2.value;
+
+              var inputElement3 = document.getElementById("EditEmailInput");  
+              var email = inputElement3.value;
+              
+              firstNameCell.innerText = first_name;
+              lastNameCell.innerText = last_name;
+              emailCell.innerText = email;
+              
+              break;
+              
+          }
+      }
+      $("#EditUserPopup").hide();
+      
+    }
+    function generateError(errorName, errorMsg) {
+    const firstNameError = document.getElementById("firstNameError");
+    const lastNameError = document.getElementById("lastNameError")
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+    if(errorName == "firstName"){
+        firstNameError.innerText = errorMsg;    
+    }
+    if(errorName == "lastName"){
+        lastNameError.innerText = errorMsg;
+    }
+    if(errorName == "email"){
+        emailError.innerText = errorMsg;    
+    }
+    if(errorName == "password"){
+        passwordError.innerText = errorMsg;
+    }
+  }
+  function addData(){
+      const newRow = tableBody.insertRow();
+      let firstname1 = document.getElementById("firstNamePopup").value;
+      let lastname1 = document.getElementById("lastNamePopup").value; 
+      let email1 = document.getElementById("emailPopup").value;
+      let password = document.getElementById("passwordPopup").value;
+      if (!firstname1) {
+        emailError = "please enter first name";
+        generateError("firstName",emailError);
+      }
+      if (!lastname1){
+        emailError = "please enter last name";
+        generateError("lastName",emailError);
+      }
+      if (!email1)
+      {
+        emailError = "please enter email address";
+        generateError("email",emailError);
+      } 
+      if (!password)
+      {
+        emailError = "please enter password";
+        generateError("password",emailError);
+      }
+      else {
+      newRow.insertCell(0).innerHTML = firstname1;
+      newRow.insertCell(1).innerHTML = lastname1; 
+      newRow.insertCell(2).innerHTML = email1;
+
+
+      const userId = Date.now();
+      newRow.setAttribute('data-user-id', userId);
+      // Create an object to store the user data
+      const userData = {
+        firstName: firstname1,
+        lastName: lastname1,
+        email: email1,
+        password: password
+      };
+      
+      // Save the user data to local storage using the user ID as the key
+      localStorage.setItem(userId, JSON.stringify(userData));
+      
+      const buttonCell = newRow.insertCell(3);
+      
+      
+      const editButton = document.createElement('button');
+      editButton.className = 'edit-button';
+      editButton.innerText = 'Edit';
+      editButton.setAttribute('data-user-id', userId); // Set id attribute to user id
+
+      const deleteButton = document.createElement('button');
+      deleteButton.className = 'delete-button';
+      deleteButton.innerText = 'Delete';
+      deleteButton.setAttribute('data-user-id', userId); // Set id attribute to user id
+
+      buttonCell.appendChild(editButton);
+      buttonCell.appendChild(deleteButton);  
+      $("#EditUserPopup").hide();
+      $("#DeleteUserPopup").hide();
+      // Edit button functionality
+      $(".edit-button").click(function(){
+          
+        const userId = $(this).data("user-id"); // Get the data-user-id attribute of the clicked button
+        console.log("userId hon")
+        console.log(userId)
+        $("#EditUserPopup")[0].setAttribute('data-user-id', userId);
+        console.log("edit user popup")
+        console.log($("#EditUserPopup"))
+        $("#EditUserPopup").show();
+
+        })
+        $("#closeAddPopup2").click(function() {
+          $("#EditUserPopup").hide();
+      })
+      // Delete button functionality
+      $(".delete-button").click(function () {
+        
+        const userId = $(this).data("user-id"); // Get the data-user-id attribute of the clicked button
+        console.log("userId hon");
+        console.log(userId);
+        $("#DeleteUserPopup")[0].setAttribute('data-user-id', userId);
+        console.log("delete user popup")
+        console.log($("#DeleteUserPopup"))
+        $("#DeleteUserPopup").show();
+    })
+      $("#closeAddPopup3").click(function() {
+        $("#DeleteUserPopup").hide();
+
+      })
+      $("#AddUserPopup").hide();
+
+    } }
+    function loadUserData() {
+      const userTable = document.getElementById("tableBody"); 
+      for (let i = 0; i < localStorage.length; i++) {
+      const userId = localStorage.key(i);
+      const userData = JSON.parse(localStorage.getItem(userId));
+      if (userData) {
+        const newRow = userTable.insertRow();
+        newRow.setAttribute('data-user-id', userId);
+        newRow.insertCell(0).innerHTML = userData.firstName;
+        newRow.insertCell(1).innerHTML = userData.lastName;
+        newRow.insertCell(2).innerHTML = userData.email;
+
+        const buttonCell = newRow.insertCell(3);
+
+        const editButton = document.createElement('button');
+        editButton.className = 'edit-button';
+        editButton.innerText = 'Edit';
+        editButton.setAttribute('data-user-id', userId);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-button';
+        deleteButton.innerText = 'Delete';
+        deleteButton.setAttribute('data-user-id', userId);
+
+        buttonCell.appendChild(editButton);
+        buttonCell.appendChild(deleteButton);
+      }
+
+  }
+}
+window.addEventListener('load', loadUserData);
+
+// Call the loadUserData function when the page loads
+window.addEventListener('load', loadUserData);
+        // Fetch JSON data from a file
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            // saveDataToLocalStorage(data);
+            // Call the populateTable function with the JSON data
+            populateTable(data);
+            $("#EditUserPopup").hide();
+            $("#DeleteUserPopup").hide();
+
+            // Edit button functionality
+            $(".edit-button").click(function(){
+
+              const userId = $(this).data("user-id"); // Get the data-user-id attribute of the clicked button
+              console.log("userId hon")
+              console.log(userId)
+              $("#EditUserPopup")[0].setAttribute('data-user-id', userId);
+              console.log("edit user popup")
+              console.log($("#EditUserPopup"))
+              $("#EditUserPopup").show();
+            const table = document.getElementById('tableBody');
+            
+            for (let i = 0; i < table.rows.length; i++) {
+                  const row = table.rows[i];
+                  const buttonUserId = row.cells[3].querySelector('.edit-button').getAttribute('data-user-id');
+                  console.log(buttonUserId)
+                  if (buttonUserId == userId) {
+                      const firstNameCell = row.cells[0];
+                      const lastNameCell = row.cells[1];
+                      const emailCell = row.cells[2];
+                      
+                      var inputElement = document.getElementById("EditFirstNameInput");
+                      var firstCell = firstNameCell.innerText;
+                      inputElement.value = firstCell;
+                      
+                          
+                      var inputElement2 = document.getElementById("EditLastNameInput");  
+                      var secondCell = lastNameCell.innerText;
+                      inputElement2.value = secondCell;
+
+                      var inputElement3 = document.getElementById("EditEmailInput");  
+                      var thirdCell = emailCell.innerText;
+                      inputElement3.value = thirdCell;
+                      
+                      break;
+                      
+                }}
+              })
+            $("#closeAddPopup2").click(function() {
+              $("#EditUserPopup").hide();
+            })
+            // Delete button functionality
+            $(".delete-button").click(function () {
+              const userId = $(this).data("user-id"); // Get the data-user-id attribute of the clicked button
+              console.log("userId hon");
+              console.log(userId);
+              $("#DeleteUserPopup")[0].setAttribute('data-user-id', userId);
+              console.log("delete user popup");
+              console.log($("#DeleteUserPopup"))
+              $("#DeleteUserPopup").show();
+            });
+            $("#closeAddPopup3").click(function() {
+              $("#DeleteUserPopup").hide();
+            })
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+
+
+
+  $("#AddUserPopup").hide();
+
+  $(document).ready(function(){
+      $(".first-button").click(function(){
+        $("#AddUserPopup").show();
+      })
+      $("#closeAddPopup").click(function() {
+        $("#AddUserPopup").hide();
+        })
+
+        $(".hamburger-menu").click(function() {
+                $(".menu").toggle();
+            });
+            
+            $(window).on('load resize', function() {
+                if ($(window).width() > 600) {
+
+                    $(".menu").show();
+                } else {
+                    $(".menu").hide();
+                }
+            });
+
+    })
+
+</script>
+
+</body>
+</html>

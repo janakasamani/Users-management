@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <h3>LAIBRUS</h3>
+    <h1>The best resource for finding books</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+  </header>
+
+  <section class="login-section">
+    <h2>Log In</h2>
+    <div>
+      <div class="input-group">
+        <input id="inputEmail" type="email" placeholder="e-mail address*"  required>
+        <p id="emailError"></p>
+      </div>
+      <div class="input-group2" id="input-password">
+        <input id="inputPassword" type="password" placeholder="Password*" required>
+        <p id="passwordError"></p>
+      </div>
+    
+      <div>
+        <button class="login-button" onclick="login()">Log In</button>
+      </div>
+      <a href="#" class="Forgot-paswword">Forgot Password?</a>
+    </div>
+    
+      <p>or login with</p>
+    <div class="icons">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fa-brands fa-google"></i>
+      <i class="fa-brands fa-linkedin"></i>
+    </div>
+    <div class="bottom">
+      <p>Don't have an account? </p>
+      <a href="./index3.html">Sign up</a>
+    </div>
+    <div id="forgotPasswordPopup" class="popup">
+      <div class="content">
+          <h2>Forgot Password</h2>
+          <span id="closeForgotPassword" class="close-button">X</span>
+          <input type="email" placeholder="Enter your email" required>
+          <button>Submit</button>
+      </div>
+    </div>
+  
+    
+  </section>
+<script>
+ 
+  function login() {
+  //for validation
+  function generateError(errorName, errorMsg) {
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+  if(errorName == "email"){
+      emailError.innerText = errorMsg;    
+  }else if(errorName == "password"){
+      passwordError.innerText = errorMsg;
+  }
+  }
+  //for login
+  let email = document.getElementById("inputEmail").value;
+  let password = document.getElementById("inputPassword").value;
+  var incorrectcredentials = true;
+  // var storedData = JSON.parse(localStorage.getItem(1698998586223));
+
+  for (let i = 0; i < localStorage.length; i++) {
+    // const defaultEmail = "default@example.com";
+    // const defaultPassword = "password123";
+    const userId = localStorage.key(i);
+    const userData = JSON.parse(localStorage.getItem(userId));
+    const defaultEmail = "default@example.com";
+    const defaultPassword = "password123";
+    if (userData && userData.password === password &&  userData.email === email || email == defaultEmail && password == defaultPassword )  {
+      incorrectcredentials = false;
+      window.location.href = "/index5.html";
+      return;
+    } 
+    if (userData.email === email && userData.password != password) {
+    passwordError = "incorrect password";
+    generateError("password",passwordError);
+    return;
+  }
+  if (email == "" ){
+    emailError = "please enter email address";
+    generateError("email",emailError);
+    } else if(email != "" && incorrectcredentials == false) {
+      passwordError = "please enter password";
+      generateError("password",passwordError);
+    }   
+    if (password == "") {   
+        passwordError = "please enter password";
+        generateError("password",passwordError);
+    } else if (password != "" && incorrectcredentials == false){
+      emailError = "please enter email address";
+      generateError("email",emailError);
+    }
+   
+  } 
+  
+  }
+
+  $("#forgotPasswordPopup").hide();
+  
+  $(document).ready(function(){
+    
+    $(".Forgot-paswword").click(function(){
+    $("#forgotPasswordPopup").show();
+    })
+    $("#closeForgotPassword").click(function() {
+    $("#forgotPasswordPopup").hide();
+      });      
+
+    $(".e-view").click(function(){
+      var input = $("#input-password");
+
+      if (input.attr("type") === "password") {
+        input.attr("type", "text");
+      } else {
+        input.attr("type", "password");
+      }
+    })
+  })
+
+
+
+
+  
+</script>
+
+</body>
+</html>

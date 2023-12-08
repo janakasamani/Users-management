@@ -1,0 +1,134 @@
+body {
+    display: flex;
+    height: 100vh;
+    overflow:hidden;
+  }
+  
+  header {
+    flex: 1;
+    padding: 20px;
+    background-color:rgb(248,112,112);
+    color: white;
+  }
+  
+  .login-section {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+  }
+  
+  .login-section h2 {
+    padding-bottom: 10px;
+  }
+  
+  .input-group, .input-group2 {
+    width: 300px;
+    position: relative;
+    }
+    
+  .input-group input, .input-group2 input,
+  .login-button {
+    width: 100%; 
+    height: 40px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-top: 20px;
+    
+  }
+  #emailError,
+  #passwordError {
+    color: red;
+    margin: 0;
+  }
+
+  .login-button {
+    background-color: rgb(248,112,112);
+    color: white;
+    cursor: pointer;
+  }
+  
+  .Forgot-paswword {
+    margin-top: 6px;
+    color: black;
+    float: right;
+    font-size: 13px;
+  }
+
+  .fab, .fa-brands {
+    color: rgb(248,112,112);
+    border-style: solid;
+    padding: 10px;
+    margin: 5px;
+    border-width: 1px;
+  }
+
+ .bottom a {
+    color: rgb(248,112,112);
+ }
+
+ .bottom p {
+  display: inline-block;
+ }
+
+ .popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  overflow: auto;
+ }
+
+.content {
+  margin: auto;
+  margin-top: 45px;
+  width: 30%;
+  padding: 10px;
+  background-color: white;
+  border-radius: 7px;
+}
+
+.content input {
+    height: 30px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 100%;
+}
+.content button {
+  background-color: rgb(248,112,112);
+  color: white;
+  padding: 10px;
+  border: 0;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.content h2 {
+  display: inline-block;
+}
+
+.close-button {
+  margin-left: 190px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 700px)  {
+  header {
+    display: none;
+  }
+
+
+
+  /* .close-button {
+    margin-left: 190px;
+    cursor: pointer;
+  } */
+  
+}

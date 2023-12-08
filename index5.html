@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles6.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1 id="nav-title">Laibrus</h1>
+        <nav>
+            <div class="hamburger-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="menu">
+                <!-- <i class="fa-solid fa-x"></i> -->
+                <li><a href="">Home</a></li>
+                <li><a href="./index6.html">Users</a></li>
+                <li><a href="./index2.html">Logout</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+<!-- section -->
+    <div class="widget">
+        <h2>widget</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+    </div>
+    <div class="widget">
+        <h2>widget</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $(".hamburger-menu").click(function() {
+                $(".menu").toggle();
+            });
+            
+            $(window).on('load resize', function() {
+                if ($(window).width() > 600) {
+
+                    $(".menu").show();
+                } else {
+                    $(".menu").hide();
+                }
+            });
+        });
+
+        
+    </script>
+        
+        
+</body>
+</html>

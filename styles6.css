@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgb(248,112,112);
+}
+
+#nav-title {
+    margin-right: auto;
+    color: white;
+    cursor: pointer;
+}
+
+header li {
+    list-style: none;
+    display: inline-block;
+    padding: 0 20px;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease 0s;
+}
+
+header a:hover {
+    color: #b2dfdb;
+}
+
+.widget {
+    margin: 30px 30px;
+    height: 200px;
+    padding: 50px;
+
+}
+.fa-solid {
+    color: white;
+    
+}
+
+.first-button {
+    float: right;
+    background-color: #198754;
+    padding: 5px;
+    color: white;
+    border: 1px solid;
+    cursor: pointer;
+}
+table {
+    width: 100%;
+}
+
+table, th, td {
+    margin-top: 70px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: start;
+     }
+.edit-button {
+    background-color: #198754;
+    border: 1px solid;
+    color: white;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: #d9534f;
+    border: 1px solid;
+    color: white;
+    padding: 4px;
+    cursor: pointer;
+    
+}
+
+.star-label:after {
+    content: " *";
+    color: red;
+  }
+
+#firstNameError , #lastNameError, #passwordError, #emailError {
+    color: red;
+} 
+
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    overflow: auto;
+   }
+  
+.content {
+    margin: auto;
+    margin-top: 45px;
+    width: 30%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 7px;
+    }
+
+.content input {
+    height: 30px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.content h2 {
+    display: inline-block;
+}
+
+.popup-input{
+    padding: 5px;
+}
+
+.popup-header{
+   padding-top: 20px;
+   padding-bottom: 10px;
+}
+.popup button {
+    padding: 10px;
+    border: 0;
+    cursor: pointer;
+    width: 45%;
+}
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.cancel-button {
+    background-color: #d9534f;
+    color: white;
+    margin-right: 5px;
+    
+}
+.Add-button {
+    background-color: #198754;
+    color: white;
+}
+
+.delete-buttons{
+    float: right;
+    margin-top: 10px;    
+}
+
+.content2 {
+    margin: auto;
+    margin-top: 45px;
+    width: 30%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 7px;
+    height: 20%;
+}
+.hamburger-menu {
+    display: none;
+}
+
+@media screen and (max-width: 600px)  {
+    
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: rgba(128, 128, 128, 0.932); 
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        left: 0; 
+        top: 0;
+    }
+ 
+    .hamburger-menu {
+        display: block; 
+        color: white;
+    }
+    .content {
+        margin: auto;
+        margin-top: 45px;
+        width: 60%;
+        padding: 10px;
+        }
+}
+
+@media (max-width: 768px) {
+    .content {
+        width: 80%;
+    }
+    .content2 {
+        width: 60%
+    }
+    .widget {
+        margin: 0px 0px;
+    }
+}
